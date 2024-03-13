@@ -1,6 +1,7 @@
 package com.dsi.spring.service.Implementation;
 
 import com.dsi.spring.dto.ClubDto;
+import com.dsi.spring.exceptions.notFound;
 import com.dsi.spring.model.Club;
 import com.dsi.spring.repository.ClubRepository;
 import com.dsi.spring.service.ClubServices;
@@ -40,7 +41,7 @@ public class ClubImplementation implements ClubServices {
 
     @Override
     public ClubDto findClubById(long id) {
-        Club club = clubRepository.findById(id).get();
+        Club club = clubRepository.findById(id).orElseThrow(() -> new notFound("Pokemon not found by this id"));
         return mapToClub(club);
     }
 
